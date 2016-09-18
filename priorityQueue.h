@@ -4,20 +4,20 @@
 
 typedef struct PriorityQueue PriorityQueue;
 
-struct PriorityQueue{
-    Node * head;        
+struct PriorityQueue {
+    Node *head;
 };
- 
-void insertNode(PriorityQueue * queue, Node * inNode);
 
-void removeFirstElement(PriorityQueue * queue);
+void insertNode( PriorityQueue *queue, Node *inNode );
 
-void printQueue(PriorityQueue * queue);
+void removeFirstElement( PriorityQueue *queue );
 
-void printQueueReverse(PriorityQueue * queue);
+void printQueue( PriorityQueue *queue );
 
-PriorityQueue * createNewLinkedList();
+void printQueueReverse( PriorityQueue *queue );
 
-void freeMem(PriorityQueue * queue);
+PriorityQueue *createNewLinkedList();
 
-void moveTopFromPriorityToFifo(PriorityQueue * priority, FifoQueue * fifo);
+void freeMem( PriorityQueue *queue );
+
+void moveTopFromPriorityToFifo( PriorityQueue *priority, FifoQueue *fifo );

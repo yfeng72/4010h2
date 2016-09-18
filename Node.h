@@ -5,13 +5,13 @@
 
 typedef struct Node Node;
 
-struct Node{
+struct Node {
     double timestamp;
-    Node * nextNode;
-    Node * prevNode;
+    Node *nextNode;
+    Node *prevNode;
 };
 
-Node * createNewNode();
+Node *createNewNode();
 
 double urand();
 
