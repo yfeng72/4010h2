@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "priorityQueue.h"
 
@@ -39,20 +40,20 @@ void insertNode( PriorityQueue *queue, Node *inNode ) {
 
 }
 
-void removeFirstElement( PriorityQueue *queue ) {
+Node *removeFirstElement( PriorityQueue *queue ) {
     Node *firstNode = queue->head;
     if ( firstNode == NULL )
-        return;
+        return NULL;
 
     if ( firstNode->nextNode == NULL ) {
-        free( firstNode );
         queue->head = NULL;
+        return firstNode;
     }
     else {
         Node *tmp = firstNode->nextNode;
-        free( firstNode );
         tmp->prevNode = NULL;
         queue->head = tmp;
+        return firstNode;
     }
 }
 
@@ -70,7 +71,7 @@ void moveTopFromPriorityToFifo( PriorityQueue *priority, FifoQueue *fifo ) {
 void printQueue( PriorityQueue *queue ) {
     Node *thisNode = queue->head;
     while ( thisNode != NULL ) {
-        printf( "%f\n", thisNode->timestamp );
+        printf( "%.2f\n", thisNode->timestamp );
         thisNode = thisNode->nextNode;
     }
 

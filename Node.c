@@ -1,7 +1,3 @@
-#ifndef __Node_C
-#define __Node_C
-
-
 #include <math.h>
 #include <stdio.h>
 #include "Node.h"
@@ -20,18 +16,17 @@ double randexp() {
     return -U * ( log( 1.0 - urand() ) );
 }
 
-Node *createNewNode() {
+Node *createNewNode( Entity *entity, Event event, int stationId, double timestamp ) {
 
     Node *retNode = malloc( sizeof( Node ) );
+    retNode->entity = entity;
+    retNode->event = event;
+    retNode->stationId = stationId;
     retNode->nextNode = NULL;
     retNode->prevNode = NULL;
-    double thisRand = randexp();
-    printf( "Using val %f\n", thisRand );
-    retNode->timestamp = thisRand;
+    retNode->timestamp = timestamp;
     return retNode;
 }
-
-#endif
 
 
 

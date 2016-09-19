@@ -1,9 +1,27 @@
-#include "fifoQueue.c"
-#include "priorityQueue.c"
+#include "fifoQueue.h"
+#include "priorityQueue.h"
 #include <time.h>
+#include <stdio.h>
+#include <math.h>
+
+
+double urand() {
+    //Subtract 1 so that we don't get value of 1 when dividing by max
+    double val = ( ( (double) rand() - 1 ) / (double) RAND_MAX );
+    if ( val < 0.0 ) {
+        val = 0.0;
+    }
+    return val;
+}
+
+double randexp() {
+    double U = 10.0;
+    return -U * ( log( 1.0 - urand() ) );
+}
+
 
 int main() {
-    srand( time(NULL) );
+    srand( time( NULL ) );
     PriorityQueue *queue = createNewLinkedList();
     insertNode( queue, createNewNode() );
     insertNode( queue, createNewNode() );
@@ -12,7 +30,7 @@ int main() {
     insertNode( queue, createNewNode() );
 
     printQueue( queue );
-    //printQueueReverse(queue);    
+    //printQueueReverse(queue);
 
 
 

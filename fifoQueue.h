@@ -1,7 +1,7 @@
 #ifndef __FifoQueue_H
 #define __FifoQueue_H
 
-#include "Node.c"
+#include "Node.h"
 
 typedef struct FifoQueue FifoQueue;
 
@@ -11,12 +11,14 @@ struct FifoQueue {
 
 void insertNodeFifo( FifoQueue *queue, Node *inNode );
 
-void removeFirstElementFifo( FifoQueue *queue );
+inline int isEmptyFifo( FifoQueue *queue ) { return queue->head == NULL ? 1 : 0; }
+
+Node *removeFirstElementFifo( FifoQueue *queue );
 
 void printQueueFifo( FifoQueue *queue );
 
 FifoQueue *createNewQueueFifo();
 
-void freeFifoMem( FifoQueue *queue );
+void freeMemFifo( FifoQueue *queue );
 
 #endif

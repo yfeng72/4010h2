@@ -1,6 +1,7 @@
 #ifndef __FifoQueue_C
 #define __FifoQueue_C
 
+#include <stdio.h>
 #include "fifoQueue.h"
 
 
@@ -23,20 +24,20 @@ void insertNodeFifo( FifoQueue *queue, Node *inNode ) {
 }
 
 
-void removeFirstElementFifo( FifoQueue *queue ) {
+Node *removeFirstElementFifo( FifoQueue *queue ) {
     Node *firstNode = queue->head;
     if ( firstNode == NULL )
-        return;
+        return NULL;
 
     if ( firstNode->nextNode == NULL ) {
-        free( firstNode );
         queue->head = NULL;
+        return firstNode;
     }
     else {
         Node *tmp = firstNode->nextNode;
-        free( firstNode );
         tmp->prevNode = NULL;
         queue->head = tmp;
+        return firstNode;
     }
 }
 
