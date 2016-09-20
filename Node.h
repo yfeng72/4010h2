@@ -11,28 +11,30 @@ typedef enum {
 
 typedef struct entity_t {
     int entityId;
-    int timeInQueue;
-    int timeInSystem;
+    double timeEnteredQueue;
+    double timeInQueue;
+    double timeInSystem;
+    struct entity_t *next;
+    struct entity_t *prev;
 } Entity;
 
-typedef struct Node Node;
-
-struct Node {
+typedef struct Node_t {
     double timestamp;
     Entity *entity;
     Event event;
     int stationId;
-    Node *nextNode;
-    Node *prevNode;
-};
+    struct Node_t *nextNode;
+    struct Node_t *prevNode;
+} Node;
 
 /**
  * Creates a new event
  */
 Node *createNewNode( Entity *entity, Event event, int stationId, double timestamp );
 
-double urand();
-
-double randexp();
+/**
+ * Creates a new entity
+ */
+Entity *createNewEntity( int entityId, double timeEnteredQueue );
 
 #endif

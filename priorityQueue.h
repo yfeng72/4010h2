@@ -10,7 +10,7 @@ struct PriorityQueue {
     Node *head;
 };
 
-inline int isEmpty( PriorityQueue *queue ) { return queue->head == NULL ? 1 : 0; }
+static inline int isEmpty( PriorityQueue *queue ) { return queue->head == NULL ? 1 : 0; }
 
 void insertNode( PriorityQueue *queue, Node *inNode );
 
@@ -23,7 +23,5 @@ void printQueueReverse( PriorityQueue *queue );
 PriorityQueue *createNewLinkedList();
 
 void freeMem( PriorityQueue *queue );
-
-void moveTopFromPriorityToFifo( PriorityQueue *priority, FifoQueue *fifo );
 
 #endif

@@ -6,14 +6,16 @@
 typedef struct FifoQueue FifoQueue;
 
 struct FifoQueue {
-    Node *head;
+    //head and tail are phantom nodes
+    Entity *head;
+    Entity *tail;
 };
 
-void insertNodeFifo( FifoQueue *queue, Node *inNode );
+void insertNodeFifo( FifoQueue *queue, Entity *inNode );
 
-inline int isEmptyFifo( FifoQueue *queue ) { return queue->head == NULL ? 1 : 0; }
+static inline int isEmptyFifo( FifoQueue *queue ) { return queue->head->next == queue->tail ? 1 : 0; }
 
-Node *removeFirstElementFifo( FifoQueue *queue );
+Entity *removeFirstFifo( FifoQueue *queue );
 
 void printQueueFifo( FifoQueue *queue );
 
