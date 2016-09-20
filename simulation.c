@@ -3,10 +3,12 @@
 #include <time.h>
 #include <stdio.h>
 #include <math.h>
+#include <mem.h>
 
 #define STATIONS 3
-#define MAXTIME 10000.0
+#define MAXTIME 100000.0
 #define SERVICE_TIME 10.0
+#define WARMUP_TIME 100.0
 
 double urand();
 double randexp( double U );
@@ -116,9 +118,11 @@ double *sim( double interarrivalTime ) {
             }
             else {
                 //Departed from last station, calculate stats, destruct the entity
-                numberOfEntities++;
-                totalTimeInSystem += curEvent->entity->timeInSystem;
-                totalTimeInQueue += curEvent->entity->timeInQueue;
+                if ( curEvent->timestamp > WARMUP_TIME ) {
+                    numberOfEntities++;
+                    totalTimeInSystem += curEvent->entity->timeInSystem;
+                    totalTimeInQueue += curEvent->entity->timeInQueue;
+                }
                 free( curEvent->entity );
                 free( curEvent );
             }
@@ -139,7 +143,25 @@ double *sim( double interarrivalTime ) {
 }
 
 int main( int argc, char **argv ) {
-    double *ret = sim( 20.0 );
-    printf( "Avg. Time in System: %.2f\nAverage. Time in queue: %.2f\n", ret[0], ret[1] );
+    //write to csv
+    FILE* file;
+    file = fopen( "output.csv", "w+" );
+    char output[8192] = "Interarrival Time, Arrival Rate, Avg. Time in System,Avg. Time in Queue,Theoretical Time in Queue\n";
+    for ( double interarrivalTime = 11.0; interarrivalTime < 51.0; interarrivalTime += 1.0 ) {
+        double *ret = sim( interarrivalTime );
+        double arrivalRate = 1.0 / interarrivalTime;
+        double avgTimeInSystem = ret[0];
+        double avgTimeInQueue = ret[1];
+        double utilization = SERVICE_TIME / interarrivalTime;
+        double theoreticalTimeInQueue = utilization / ( 1.0 - utilization ) * SERVICE_TIME * STATIONS;
+        printf( "Avg. Time in System: %.2f\nAverage. Time in queue: %.2f\n", avgTimeInSystem, avgTimeInQueue );
+        char row[50];
+        sprintf( row, "%.2f,%.4f,%f,%f,%f\n", interarrivalTime, arrivalRate, avgTimeInSystem, avgTimeInQueue, theoreticalTimeInQueue );
+        strcat( output, row );
+        free( ret );
+    }
+    fputs( output, file );
+    fclose( file );
+    printf( "output.csv generated\n" );
     return 0;
 }
