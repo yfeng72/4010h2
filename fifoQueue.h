@@ -1,22 +1,26 @@
 #ifndef __FifoQueue_H
 #define __FifoQueue_H
 
-#include "Node.c"
+#include "Node.h"
 
 typedef struct FifoQueue FifoQueue;
 
 struct FifoQueue {
-    Node *head;
+    //head and tail are phantom nodes
+    Entity *head;
+    Entity *tail;
 };
 
-void insertNodeFifo( FifoQueue *queue, Node *inNode );
+void insertNodeFifo( FifoQueue *queue, Entity *inNode );
 
-void removeFirstElementFifo( FifoQueue *queue );
+static inline int isEmptyFifo( FifoQueue *queue ) { return queue->head->next == queue->tail ? 1 : 0; }
+
+Entity *removeFirstFifo( FifoQueue *queue );
 
 void printQueueFifo( FifoQueue *queue );
 
 FifoQueue *createNewQueueFifo();
 
-void freeFifoMem( FifoQueue *queue );
+void freeMemFifo( FifoQueue *queue );
 
 #endif

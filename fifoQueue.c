@@ -1,66 +1,54 @@
 #ifndef __FifoQueue_C
 #define __FifoQueue_C
 
+#include <stdio.h>
 #include "fifoQueue.h"
 
 
-void insertNodeFifo( FifoQueue *queue, Node *inNode ) {
-    Node *thisNode = queue->head;
-    if ( thisNode == NULL ) {
-        queue->head = inNode;
-        printf( "Inserted into head\n" );
-        return;
-    }
-
-    while ( thisNode->nextNode != NULL ) {
-        thisNode = thisNode->nextNode;
-    }
-    thisNode->nextNode = inNode;
-    if ( inNode == NULL )
-        printf( "This is null???\n" );
-    inNode->prevNode = thisNode;
-    inNode->nextNode = NULL; //Since always inserted at back
+void insertNodeFifo( FifoQueue *queue, Entity *inNode ) {
+    //insert at the end
+    Entity *last = queue->tail->prev;
+    last->next = inNode;
+    inNode->prev = last;
+    inNode->next = queue->tail;
+    queue->tail->prev = inNode;
 }
 
 
-void removeFirstElementFifo( FifoQueue *queue ) {
-    Node *firstNode = queue->head;
-    if ( firstNode == NULL )
-        return;
-
-    if ( firstNode->nextNode == NULL ) {
-        free( firstNode );
-        queue->head = NULL;
-    }
-    else {
-        Node *tmp = firstNode->nextNode;
-        free( firstNode );
-        tmp->prevNode = NULL;
-        queue->head = tmp;
-    }
+Entity *removeFirstFifo( FifoQueue *queue ) {
+    Entity *firstNode = queue->head->next;
+    if ( firstNode == queue->tail ) return NULL;
+    firstNode->next->prev = queue->head;
+    queue->head->next = firstNode->next;
+    return firstNode;
 }
 
 void printQueueFifo( FifoQueue *queue ) {
 
-    Node *thisNode = queue->head;
-    while ( thisNode != NULL ) {
-        printf( "%f\n", thisNode->timestamp );
-        thisNode = thisNode->nextNode;
+    Entity *thisNode = queue->head->next;
+    while ( thisNode != queue->tail ) {
+        printf( "%f\n", thisNode->entityId );
+        thisNode = thisNode->next;
     }
 
 }
 
 FifoQueue *createNewQueueFifo() {
-    FifoQueue *linkedList = malloc( sizeof( FifoQueue ));
-    linkedList->head = NULL;
+    FifoQueue *linkedList = (FifoQueue*) malloc( sizeof( FifoQueue ) );
+    linkedList->head = createNewEntity( -1, -1.0 );
+    linkedList->tail = createNewEntity( -2, -2.0 );
+    linkedList->head->next = linkedList->tail;
+    linkedList->head->prev = NULL;
+    linkedList->tail->prev = linkedList->head;
+    linkedList->tail->next = NULL;
     return linkedList;
 }
 
 
 void freeMemFifo( FifoQueue *queue ) {
-    Node *thisNode = queue->head;
+    Entity *thisNode = queue->head;
     while ( thisNode != NULL ) {
-        Node *tmp = thisNode->nextNode;
+        Entity *tmp = thisNode->next;
         free( thisNode );
         thisNode = tmp;
     }

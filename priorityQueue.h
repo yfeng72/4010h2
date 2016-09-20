@@ -1,6 +1,8 @@
+#ifndef __PriorityQueue_H
+#define __PriorityQueue_H
 #include <stdlib.h>
-#include "Node.c"
-#include "fifoQueue.c"
+#include "Node.h"
+#include "fifoQueue.h"
 
 typedef struct PriorityQueue PriorityQueue;
 
@@ -8,9 +10,11 @@ struct PriorityQueue {
     Node *head;
 };
 
+static inline int isEmpty( PriorityQueue *queue ) { return queue->head == NULL ? 1 : 0; }
+
 void insertNode( PriorityQueue *queue, Node *inNode );
 
-void removeFirstElement( PriorityQueue *queue );
+Node *removeFirstElement( PriorityQueue *queue );
 
 void printQueue( PriorityQueue *queue );
 
@@ -20,4 +24,4 @@ PriorityQueue *createNewLinkedList();
 
 void freeMem( PriorityQueue *queue );
 
-void moveTopFromPriorityToFifo( PriorityQueue *priority, FifoQueue *fifo );
+#endif
