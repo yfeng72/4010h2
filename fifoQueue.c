@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include "fifoQueue.h"
 
-
 void insertNodeFifo( FifoQueue *queue, Entity *inNode ) {
     //insert at the end
     Entity *last = queue->tail->prev;
@@ -14,23 +13,12 @@ void insertNodeFifo( FifoQueue *queue, Entity *inNode ) {
     queue->tail->prev = inNode;
 }
 
-
 Entity *removeFirstFifo( FifoQueue *queue ) {
     Entity *firstNode = queue->head->next;
     if ( firstNode == queue->tail ) return NULL;
     firstNode->next->prev = queue->head;
     queue->head->next = firstNode->next;
     return firstNode;
-}
-
-void printQueueFifo( FifoQueue *queue ) {
-
-    Entity *thisNode = queue->head->next;
-    while ( thisNode != queue->tail ) {
-        printf( "%f\n", thisNode->entityId );
-        thisNode = thisNode->next;
-    }
-
 }
 
 FifoQueue *createNewQueueFifo() {
@@ -43,7 +31,6 @@ FifoQueue *createNewQueueFifo() {
     linkedList->tail->next = NULL;
     return linkedList;
 }
-
 
 void freeMemFifo( FifoQueue *queue ) {
     Entity *thisNode = queue->head;

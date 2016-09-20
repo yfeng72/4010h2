@@ -17,8 +17,6 @@ static inline int isEmptyFifo( FifoQueue *queue ) { return queue->head->next == 
 
 Entity *removeFirstFifo( FifoQueue *queue );
 
-void printQueueFifo( FifoQueue *queue );
-
 FifoQueue *createNewQueueFifo();
 
 void freeMemFifo( FifoQueue *queue );

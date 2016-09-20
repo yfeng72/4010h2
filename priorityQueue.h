@@ -16,10 +16,6 @@ void insertNode( PriorityQueue *queue, Node *inNode );
 
 Node *removeFirstElement( PriorityQueue *queue );
 
-void printQueue( PriorityQueue *queue );
-
-void printQueueReverse( PriorityQueue *queue );
-
 PriorityQueue *createNewLinkedList();
 
 void freeMem( PriorityQueue *queue );
