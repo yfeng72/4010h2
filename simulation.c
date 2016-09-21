@@ -151,7 +151,7 @@ int main( int argc, char **argv ) {
         double avgTimeInQueue = ret[1];
         double utilization = SERVICE_TIME / interarrivalTime;
         double theoreticalTimeInQueue = utilization / ( 1.0 - utilization ) * SERVICE_TIME * STATIONS;
-        printf( "Avg. Time in System: %.2f\nAverage. Time in queue: %.2f\n", avgTimeInSystem, avgTimeInQueue );
+        printf( "Avg. Time in System: %.2f\nAvg. Time in queue: %.2f\n", avgTimeInSystem, avgTimeInQueue );
         char row[50];
         sprintf( row, "%.2f,%.4f,%f,%f,%f\n", interarrivalTime, arrivalRate, avgTimeInSystem, avgTimeInQueue,
                  theoreticalTimeInQueue );
@@ -160,6 +160,6 @@ int main( int argc, char **argv ) {
     }
     fputs( output, file );
     fclose( file );
-    printf( "output.csv generated\n" );
+    STATIONS == 3 ? printf( "output.csv generated\n" ) : printf( "singleStation.csv generated\n" );
     return 0;
 }
