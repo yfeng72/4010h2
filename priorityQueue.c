@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "priorityQueue.h"
 
-//Place smallest node vals at front
+//Place smallest node values at front
 void insertNode( PriorityQueue *queue, Node *inNode ) {
     inNode->prevNode = NULL;
     inNode->nextNode = NULL;

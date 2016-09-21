@@ -2,7 +2,6 @@
 #include "Node.h"
 
 Node *createNewNode( Entity *entity, Event event, int stationId, double timestamp ) {
-
     Node *retNode = malloc( sizeof( Node ) );
     retNode->entity = entity;
     retNode->event = event;

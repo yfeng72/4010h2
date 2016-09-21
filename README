@@ -1,8 +1,0 @@
-#To compile, need to use
-gcc testRun.c -lm
-#DO NOT FORGET THE -lm or linker will fail  
-
-#Two types of queues: fifo and priority, priority sorts according to timestamp
-#and fifo is simple first come first serve
-#ensure calling fifo named methods for fifo queue operations
-#check in priorityQueue for function that moves from top of priority queue to back of fifo queue 
