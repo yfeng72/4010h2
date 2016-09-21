@@ -4,15 +4,23 @@ Yu Feng, Julian Rosker
 
 # Compilation and Run Instructions
 
-To Compile: gcc -std=c99 -o sim.o simulation.c fifoQueue.c Node.c priorityQueue.c RNG.c -lm
-To Run: ./sim.o
+To Compile Simulation: gcc -std=c99 -o sim.o simulation.c fifoQueue.c Node.c priorityQueue.c RNG.c -lm
+To Compile Priority Queue Performance Benchmark: gcc -std=c99 -o bm.o benchmark.c priorityQueue.c Node.c RNG.c -lm
+
+To Run Simulation with 3 stations (default): ./sim.o
 To Run Simulation with a single station: ./sim.o -singleStation
+
+To Run Benchmark of Priority Queue Insertion/Deletion Performance: ./bm.o
 
 # Files
 
 ## Discrete Event Simulator
 
-simulation.c: Main executable of the Discrete Event Simulator
+simulation.c: Main executable of the Discrete Event Simulator, details see documentations inside this file
+
+## Priority Queue Run Time Benchmark
+
+benchmark.c: Main executable of the Priority Queue Benchmark, details see documentations inside this file
 
 ## Libraries
 
