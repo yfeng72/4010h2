@@ -4,13 +4,13 @@ Yu Feng, Julian Rosker
 
 # Compilation and Run Instructions
 
-To Compile Simulation: gcc -std=c99 -o sim.o simulation.c fifoQueue.c Node.c priorityQueue.c RNG.c -lm
-To Compile Priority Queue Performance Benchmark: gcc -std=c99 -o bm.o benchmark.c priorityQueue.c Node.c RNG.c -lm
+To Compile Simulation: gcc -std=c99 -o Simulation simulation.c fifoQueue.c Node.c priorityQueue.c RNG.c -lm
+To Compile Priority Queue Performance Benchmark: gcc -std=c99 -o Benchmark benchmark.c priorityQueue.c Node.c RNG.c -lm
 
-To Run Simulation with 3 stations (default): ./sim.o
-To Run Simulation with a single station: ./sim.o -singleStation
+To Run Simulation with 3 stations (default): ./Simulation
+To Run Simulation with a single station: ./Simulation -singleStation
 
-To Run Benchmark of Priority Queue Insertion/Deletion Performance: ./bm.o
+To Run Benchmark of Priority Queue Insertion/Deletion Performance: ./Benchmark
 
 # Files
 
